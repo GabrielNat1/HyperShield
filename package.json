@@ -1,0 +1,23 @@
+{
+  "name": "hypershield",
+  "version": "1.0.0",
+  "main": "index.js",
+  "directories": {
+    "build": "tsc",
+    "start": "ts-node src/index.ts"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "GabrielNat1",
+  "license": "ISC",
+  "description": "Middleware suite for high-performance and resilient APIs",
+  "devDependencies": {
+    "@types/express": "^5.0.1",
+    "@types/redis": "^4.0.10"
+  },
+  "dependencies": {
+    "dotenv": "^16.5.0"
+  }
+}
