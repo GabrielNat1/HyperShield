@@ -67,7 +67,7 @@ View our [architectural diagram](./assets/architecture.svg) to understand how Hy
 
 ## Quick Links
 
-- [Architecture Diagram](./assets/architecture.svg)
+- [Architecture Diagram](./assets/diagrams/HyperShield.png)
 - [Configuration Examples](./examples/)
 
 ## Installation
