@@ -4,9 +4,25 @@ import { ICacheProvider } from '../../domains/cache/domain/ICacheProvider';
 export class RedisCache implements ICacheProvider {
     private client: RedisClientType;
 
-    constructor(config: { host: string; port: number; password?: string }) {
+    constructor(config: { host: string; port: number; password?: string; maxRetries?: number }) {
         const url = `redis://${config.password ? `:${config.password}@` : ''}${config.host}:${config.port}`;
-        this.client = createClient({ url });
+        interface RetryStrategy {
+            (retryAttempts: number): number | null;
+        }
+
+        interface RedisClientConfig {
+            url: string;
+            retry_strategy: RetryStrategy;
+        }
+
+        this.client = createClient({ 
+            url,
+            retry_strategy: (times: number): number | null => {
+            if (times > (config.maxRetries ?? 3)) return null;
+            return Math.min(times * 100, 3000);
+            }
+        } as RedisClientConfig);
+
         this.client.connect().catch(err => {
             throw new Error(`Falha ao conectar ao Redis: ${err.message}`);
         });
@@ -17,8 +33,13 @@ export class RedisCache implements ICacheProvider {
     }
 
     async get<T>(key: string): Promise<T | null> {
-        const value = await this.client.get(key);
-        return value ? JSON.parse(value) : null;
+        try {
+            const value = await this.client.get(key);
+            return value ? JSON.parse(value) : null;
+        } catch (error) {
+            console.error(`Redis get error: ${error}`);
+            return null;
+        }
     }
 
     async set<T>(key: string, value: T, ttl?: number): Promise<void> {
