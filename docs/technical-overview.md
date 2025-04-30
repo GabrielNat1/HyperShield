@@ -4,7 +4,7 @@
 
 HyperShield follows a domain-driven design approach with the following key components:
 
-![Architecture Diagram](./assets/architecture.svg)
+![Architecture Diagram](../assets/diagrams/HyperShield.png)
 
 ### Core Components
 
