@@ -56,7 +56,7 @@ Choose the cache provider that best fits your needs:
 
 For detailed documentation, please check the [docs](./docs) directory.
 
-View our [architectural diagram](./assets/architecture.svg) to understand how HyperShield components work together.
+View our [architectural diagram](./assets/diagrams/HyperShield.png) to understand how HyperShield components work together.
 
 ## Table of Contents
 
