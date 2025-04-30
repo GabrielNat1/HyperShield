@@ -1,0 +1,7 @@
+src/
+tests/
+examples/
+*.ts
+*.map
+*.test.*
+.env

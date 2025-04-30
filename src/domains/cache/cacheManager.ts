@@ -1,39 +1,40 @@
 import { CacheConfig } from '../../core/types/config';
-
-export interface CacheProvider {
-    get(key: string): Promise<any>;
-    set(key: string, value: any, ttl?: number): Promise<void>;
-    delete(key: string): Promise<void>;
-}
+import { ICacheProvider } from './domain/ICacheProvider';
+import { MemoryCache } from '../../shared/cache/memory';
+import { RedisCache } from '../../shared/cache/redis';
 
 export class CacheManager {
     private config: CacheConfig;
-    private provider?: CacheProvider;
+    private provider: ICacheProvider;
 
     constructor(config: CacheConfig) {
         this.config = config;
+        this.provider = this.createProvider();
     }
 
-    public initialize(): void {
-        // Initialize cache provider based on config
+    private createProvider(): ICacheProvider {
         switch (this.config.provider) {
             case 'redis':
-                // Initialize Redis provider
-                break;
-            case 'memcached':
-                // Initialize Memcached provider
-                break;
+                if (!this.config.connection) {
+                    throw new Error('Redis connection config is required');
+                }
+                return new RedisCache(this.config.connection);
             case 'memory':
-                // Initialize in-memory provider
-                break;
+                return new MemoryCache();
+            default:
+                throw new Error(`Unsupported cache provider: ${this.config.provider}`);
         }
     }
 
-    async get(key: string): Promise<any> {
-        return this.provider?.get(key);
+    async get<T>(key: string): Promise<T | null> {
+        return this.provider.get<T>(key);
     }
 
-    async set(key: string, value: any, ttl?: number): Promise<void> {
-        await this.provider?.set(key, value, ttl || this.config.ttl);
+    async set<T>(key: string, value: T, ttl?: number): Promise<void> {
+        await this.provider.set(key, value, ttl || this.config.ttl);
+    }
+
+    async delete(key: string): Promise<void> {
+        await this.provider.delete(key);
     }
 }
