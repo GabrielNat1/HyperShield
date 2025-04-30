@@ -7,7 +7,13 @@ export class RedisCache implements ICacheProvider {
     constructor(config: { host: string; port: number; password?: string }) {
         const url = `redis://${config.password ? `:${config.password}@` : ''}${config.host}:${config.port}`;
         this.client = createClient({ url });
-        this.client.connect();
+        this.client.connect().catch(err => {
+            throw new Error(`Falha ao conectar ao Redis: ${err.message}`);
+        });
+
+        this.client.on('error', (err) => {
+            console.error('Erro no cliente Redis:', err);
+        });
     }
 
     async get<T>(key: string): Promise<T | null> {
