@@ -5,10 +5,13 @@ import { RedisCache } from '../../shared/cache/redis';
 
 export class CacheManager {
     private config: CacheConfig;
-    private provider: ICacheProvider;
+    private provider?: ICacheProvider;
 
     constructor(config: CacheConfig) {
         this.config = config;
+    }
+
+    public initialize(): void {
         this.provider = this.createProvider();
     }
 
@@ -26,15 +29,24 @@ export class CacheManager {
         }
     }
 
+    private ensureInitialized() {
+        if (!this.provider) {
+            throw new Error('Cache manager not initialized. Call initialize() first.');
+        }
+    }
+
     async get<T>(key: string): Promise<T | null> {
-        return this.provider.get<T>(key);
+        this.ensureInitialized();
+        return this.provider!.get<T>(key);
     }
 
     async set<T>(key: string, value: T, ttl?: number): Promise<void> {
-        await this.provider.set(key, value, ttl || this.config.ttl);
+        this.ensureInitialized();
+        await this.provider!.set(key, value, ttl || this.config.ttl);
     }
 
     async delete(key: string): Promise<void> {
-        await this.provider.delete(key);
+        this.ensureInitialized();
+        await this.provider!.delete(key);
     }
 }
