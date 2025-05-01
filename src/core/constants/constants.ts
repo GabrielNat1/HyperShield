@@ -23,7 +23,14 @@ export const COMPRESSION = {
         DEFAULT_LEVEL: 6,
         DEFAULT_CHUNK_SIZE: 16 * 1024, // 16KB
         DEFAULT_MEM_LEVEL: 8,
-        MIN_SIZE_TO_COMPRESS: 1024 // 1KB
+        MIN_SIZE_TO_COMPRESS: 1024, // 1KB
+        STRATEGY: {
+            DEFAULT: 0,
+            FILTERED: 1,
+            HUFFMAN_ONLY: 2,
+            RLE: 3,
+            FIXED: 4
+        }
     },
     CONTENT_TYPES: {
         COMPRESSIBLE: [
