@@ -1,6 +1,7 @@
 import { Alert, AlertOptions, AlertSeverity } from '../domain/alert';
 import { AlertSenderFactory } from '../infrastructure/alertSender';
 import { randomUUID } from 'crypto';
+import { ALERTS } from '../../../core/constants/constants';
 
 export class AlertService {
     private options: AlertOptions;
@@ -8,8 +9,8 @@ export class AlertService {
 
     constructor(options: AlertOptions) {
         this.options = {
-            throttleMs: 1000,
-            retryAttempts: 3,
+            throttleMs: ALERTS.THROTTLE.DEFAULT_MS,
+            retryAttempts: ALERTS.RETRY.DEFAULT_ATTEMPTS,
             ...options
         };
     }
@@ -65,8 +66,10 @@ export class AlertService {
         try {
             await sendFn(alert);
         } catch (error) {
-            if (attempt < (this.options.retryAttempts || 3)) {
-                await new Promise(resolve => setTimeout(resolve, 1000 * attempt));
+            if (attempt < ALERTS.RETRY.MAX_ATTEMPTS) {
+                await new Promise(resolve => 
+                    setTimeout(resolve, ALERTS.RETRY.BASE_DELAY * attempt)
+                );
                 return this.sendWithRetry(sendFn, alert, attempt + 1);
             }
             throw error;

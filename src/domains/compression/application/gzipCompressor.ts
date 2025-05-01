@@ -1,6 +1,7 @@
 import { gzip, gunzip } from 'zlib';
 import { promisify } from 'util';
 import { ICompressor } from '../domain/ICompressor';
+import { COMPRESSION } from '../../../core/constants/constants';
 
 const gzipAsync = promisify(gzip);
 const gunzipAsync = promisify(gunzip);
@@ -8,8 +9,11 @@ const gunzipAsync = promisify(gunzip);
 export class GzipCompressor implements ICompressor {
     private level: number;
 
-    constructor(level: number = 6) { // 6 é o nível padrão de compressão
-        this.level = level;
+    constructor(level: number = COMPRESSION.GZIP.DEFAULT_LEVEL) {
+        this.level = Math.min(
+            Math.max(level, COMPRESSION.GZIP.MIN_LEVEL),
+            COMPRESSION.GZIP.MAX_LEVEL
+        );
     }
 
     async compress(data: string | Buffer): Promise<Buffer> {

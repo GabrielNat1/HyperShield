@@ -1,4 +1,5 @@
 import { CacheConfig } from '../../core/types/config';
+import { CACHE } from '../../core/constants/constants';
 import { ICacheProvider } from './domain/ICacheProvider';
 import { MemoryCache } from '../../shared/cache/memory';
 import { RedisCache } from '../../shared/cache/redis';
@@ -42,7 +43,11 @@ export class CacheManager {
 
     async set<T>(key: string, value: T, ttl?: number): Promise<void> {
         this.ensureInitialized();
-        await this.provider!.set(key, value, ttl || this.config.ttl);
+        const validTtl = Math.min(
+            Math.max(ttl || CACHE.DEFAULT_TTL, CACHE.MIN_TTL),
+            CACHE.MAX_TTL
+        );
+        await this.provider!.set(key, value, validTtl);
     }
 
     async delete(key: string): Promise<void> {

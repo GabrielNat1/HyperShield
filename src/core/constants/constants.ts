@@ -1,7 +1,7 @@
 /* -----------------------------------------------------------------
 
     * @file constants/index.ts
-    * @note Constants defined but not yet implemented in the application.
+    * @note Constants defined in gzip, cache, alerts
 
     ----------------------------------------------------------------- */
 
