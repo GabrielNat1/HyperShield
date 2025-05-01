@@ -58,4 +58,28 @@ export class RedisCache implements ICacheProvider {
     async clear(): Promise<void> {
         await this.client.flushAll();
     }
+
+    async mget<T>(keys: string[]): Promise<(T | null)[]> {
+        try {
+            const values = await this.client.mGet(keys);
+            return values.map(value => value ? JSON.parse(value) : null);
+        } catch (error) {
+            console.error(`Redis mget error: ${error}`);
+            return new Array(keys.length).fill(null);
+        }
+    }
+
+    async exists(key: string): Promise<boolean> {
+        const result = await this.client.exists(key);
+        return result === 1;
+    }
+
+    async updateTTL(key: string, ttl: number): Promise<boolean> {
+        return await this.client.expire(key, ttl);
+    }
+
+    async getTTL(key: string): Promise<number | null> {
+        const ttl = await this.client.ttl(key);
+        return ttl >= 0 ? ttl : null;
+    }
 }
