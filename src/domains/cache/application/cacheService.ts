@@ -64,4 +64,35 @@ export class CacheService {
             console.error(`Cache clear error: ${error}`);
         }
     }
+
+    async has(key: string): Promise<boolean> {
+        try {
+            const value = await this.get(key);
+            return value !== null;
+        } catch (error) {
+            console.error(`Cache check error: ${error}`);
+            return false;
+        }
+    }
+
+    async getOrSet<T>(key: string, factory: () => Promise<T>, ttl?: number): Promise<T> {
+        const cached = await this.get<T>(key);
+        if (cached !== null) {
+            return cached;
+        }
+
+        const value = await factory();
+        await this.set(key, value, ttl);
+        return value;
+    }
+
+    async mget<T>(keys: string[]): Promise<(T | null)[]> {
+        return Promise.all(keys.map(key => this.get<T>(key)));
+    }
+
+    async mset(entries: { key: string; value: any; ttl?: number }[]): Promise<void> {
+        await Promise.all(
+            entries.map(entry => this.set(entry.key, entry.value, entry.ttl))
+        );
+    }
 }
