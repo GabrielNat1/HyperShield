@@ -64,6 +64,7 @@ View our [architectural diagram](./assets/diagrams/HyperShield.png) to understan
 2. [Technical Overview](./docs/technical-overview.md)
 3. [Compression Guide](./docs/compression.md)
 4. [Memory Cache Guide](./docs/memory-cache.md)
+5. [Metrics](./docs/metrics.md)
 
 ## Quick Links
 

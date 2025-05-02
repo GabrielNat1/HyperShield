@@ -35,9 +35,10 @@ export class CompressionFactory {
             case 'gzip':
                 compressor = new GzipCompressor(validatedOptions.level);
                 break;
-
             // --------------------------------------------------------------
-            // futuros tipos que serão implementados
+            // * @note: futuros tipos que serão implementados
+            // --------------------------------------------------------------
+
             case 'brotli':
                 throw new Error(`Compressor type '${type}' not implemented yet`);
             case 'deflate':

@@ -9,6 +9,7 @@ export const CACHE = {
     DEFAULT_TTL: 3600,
     MIN_TTL: 1,
     MAX_TTL: 86400, // 24 hr
+    COMPRESSION_PREFIX: 'gz:', // Added this line
     RETRY: {
         MAX_ATTEMPTS: 3,
         BASE_DELAY: 1000, // 1 sg

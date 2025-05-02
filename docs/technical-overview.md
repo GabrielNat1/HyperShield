@@ -8,23 +8,27 @@ HyperShield follows a domain-driven design approach with the following key compo
 
 ### Core Components
 
-- **Cache Layer**: Supports multiple providers (Redis, Memory)
-- **Compression Service**: GZIP implementation with extensible interface
-- **Alert System**: Configurable alert dispatching with multiple destinations
+- **Cache Layer**: Multiple provider support (Redis, Memory) with automatic compression
+- **Compression Service**: GZIP implementation with configurable levels
+- **Alert System**: Configurable alert dispatching with throttling and retries
+- **Metrics**: Built-in Prometheus metrics for monitoring
+- **Event Bus**: Internal event system for component communication
 
 ### Directory Structure
 
 ```
 src/
-├── adapters/        # Framework adapters (Express, Fastify)
-├── core/           # Core types and utilities
-├── domains/        # Business logic organized by domain
+├── adapters/       # Framework adapters (Express, Fastify)
+├── core/           # Core types, events, and constants
+├── domains/        # Business logic by domain
+│   ├── cache/      # Caching functionality
+│   ├── compression/# Compression services
+│   ├── alerts/     # Alert system
+│   └── metrics/    # Metrics collection
 └── shared/         # Shared utilities and services
 ```
 
 ## Configuration
-
-Detailed configuration options for each component:
 
 ### Cache Configuration
 ```typescript
@@ -32,9 +36,11 @@ interface CacheConfig {
   enabled: boolean;
   provider: 'redis' | 'memory';
   ttl: number;
+  compression?: boolean;
   connection?: {
     host: string;
     port: number;
+    password?: string;
   }
 }
 ```
@@ -45,5 +51,15 @@ interface CompressionConfig {
   enabled: boolean;
   type: 'gzip';
   level?: number;
+  threshold?: number;
+}
+```
+
+### Metrics Configuration
+```typescript
+interface MetricsConfig {
+  enabled: boolean;
+  path?: string;
+  defaultLabels?: Record<string, string>;
 }
 ```

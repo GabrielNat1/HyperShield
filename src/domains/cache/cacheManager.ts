@@ -23,8 +23,10 @@ export class CacheManager {
                     throw new Error('Redis connection config is required');
                 }
                 return new RedisCache(this.config.connection);
+
             case 'memory':
                 return new MemoryCache();
+
             default:
                 throw new Error(`Unsupported cache provider: ${this.config.provider}`);
         }
