@@ -23,9 +23,9 @@
     "test:clear-cache": "jest --clearCache",
     "test:debug": "node --inspect-brk ./node_modules/jest/bin/jest.js --runInBand"
   },
-  "keywords": [],
+  "keywords": ["cache", "compression", "middleware", "api", "typescript"],
   "author": "GabrielNat1",
-  "license": "ISC",
+  "license": "MIT",
   "description": "Middleware suite for high-performance and resilient APIs",
   "devDependencies": {
     "@types/express": "^5.0.1",
@@ -52,4 +52,5 @@
     "url": "https://github.com/GabrielNat1/HyperShield/issues"
   },
   "homepage": "https://github.com/GabrielNat1/HyperShield#readme"
+  
 }
