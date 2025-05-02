@@ -56,45 +56,6 @@ app.use(shield.cache());
 shield.metrics.enable();
 ```
 
-### Advanced Configuration
-
-```typescript
-const shield = new HyperShield({
-  cache: {
-    enabled: true,
-    provider: 'redis',
-    ttl: 3600,
-    connection: {
-      host: 'localhost',
-      port: 6379,
-      password: 'secret',
-      maxRetries: 3,
-      reconnectStrategy: {
-        maxAttempts: 5,
-        initialDelay: 1000,
-        maxDelay: 5000
-      }
-    }
-  },
-  compression: {
-    enabled: true,
-    type: 'gzip',
-    level: 6,
-    threshold: 1024
-  },
-  alerts: {
-    enabled: true,
-    providers: ['email', 'webhook'],
-    throttleMs: 1000
-  },
-  metrics: {
-    enabled: true,
-    path: '/metrics',
-    collectDefaultMetrics: true
-  }
-});
-```
-
 See [examples](./examples/) for more complex use cases.
 
 ## Installation
