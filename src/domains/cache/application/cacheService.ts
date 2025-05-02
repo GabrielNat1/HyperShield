@@ -33,7 +33,8 @@ export class CacheService {
 
     async get<T>(key: string): Promise<T | null> {
         try {
-            return await this.provider.get<T>(key);
+            const result = await this.provider.get<T>(key);
+            return result === undefined ? null : result;
         } catch (error) {
             console.error(`Cache get error: ${error}`);
             return null;
@@ -42,6 +43,9 @@ export class CacheService {
 
     async set<T>(key: string, value: T, ttl?: number): Promise<void> {
         try {
+            if (value === undefined || value === null) {
+                return;
+            }
             const validTtl = ttl ?? this.config.ttl ?? CACHE.DEFAULT_TTL;
             await this.provider.set(key, value, validTtl);
         } catch (error) {

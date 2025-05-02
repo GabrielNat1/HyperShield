@@ -7,6 +7,7 @@ export class MemoryCache implements ICacheProvider {
     private compression: CompressionService;
     private options: Required<MemoryCacheOptions>;
     private currentSize = 0;
+    private pruneIntervalId?: NodeJS.Timeout;
 
     constructor(options: MemoryCacheOptions = {}) {
         this.compression = new CompressionService();
@@ -24,7 +25,15 @@ export class MemoryCache implements ICacheProvider {
     }
 
     private startPruneInterval(): void {
-        setInterval(() => this.prune(), this.options.pruneInterval);
+        this.pruneIntervalId = setInterval(() => this.prune(), this.options.pruneInterval);
+        this.pruneIntervalId.unref(); // Allow process to exit if this is the only timer
+    }
+
+    public cleanup(): void {
+        if (this.pruneIntervalId) {
+            clearInterval(this.pruneIntervalId);
+            this.pruneIntervalId = undefined;
+        }
     }
 
     private async prune(): Promise<void> {
@@ -81,12 +90,16 @@ export class MemoryCache implements ICacheProvider {
         entry.lastAccessed = Date.now();
         this.cache.set(key, entry);
 
-        if (this.options.compression) {
-            const decompressed = await this.compression.decompress(entry.value);
-            return JSON.parse(decompressed.toString()) as T;
+        try {
+            if (this.options.compression && Buffer.isBuffer(entry.value)) {
+                const decompressed = await this.compression.decompress(entry.value);
+                return JSON.parse(decompressed.toString()) as T;
+            }
+            return entry.value;
+        } catch (error) {
+            console.error('Cache decompression error:', error);
+            return null;
         }
-
-        return entry.value;
     }
 
     async set<T>(key: string, value: T, ttl?: number): Promise<void> {

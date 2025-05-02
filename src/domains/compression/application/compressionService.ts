@@ -47,6 +47,9 @@ export class CompressionService {
 
     async decompress(data: Buffer): Promise<Buffer> {
         try {
+            if (!this.isCompressed(data)) {
+                return data;
+            }
             return await gunzipAsync(data);
         } catch (error) {
             const errorMessage = error instanceof Error ? error.message : 'Unknown error';
@@ -64,7 +67,7 @@ export class CompressionService {
     }
 
     isCompressed(data: Buffer): boolean {
-        // Check for GZIP magic numbers (1f 8b)
+        // GZIP magic numbers (1f 8b)
         return data.length >= 2 && data[0] === 0x1f && data[1] === 0x8b;
     }
 }
