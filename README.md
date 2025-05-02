@@ -9,30 +9,56 @@ A high-performance middleware suite for building resilient APIs with built-in ca
 - 📊 Built-in monitoring and alerts
 - 🛡️ Rate limiting and circuit breaking
 - 📝 Extensive logging capabilities
+- 🔍 Detailed metrics collection
+- ⚡ Optimized for high-throughput
+
+## Documentation
+
+- [Getting Started](./docs/getting-started.md)
+- [Technical Overview](./docs/technical-overview.md)
+- [Advanced Usage](./docs/advanced-usage.md)
+- [Compression Guide](./docs/compression.md)
+- [Memory Cache Guide](./docs/memory-cache.md)
+- [Redis Cache Guide](./docs/redis-cache.md)
+- [Metrics & Monitoring](./docs/metrics.md)
+- [Performance Tuning](./docs/performance-tuning.md)
+- [Troubleshooting](./docs/troubleshooting.md)
 
 ## Quick Start
 
-### Using Memory Cache (No Redis required)
+### Basic Setup
 
 ```typescript
 import { HyperShield } from 'hypershield';
+import express from 'express';
 
+const app = express();
 const shield = new HyperShield({
   cache: {
     enabled: true,
-    provider: 'memory', // In-memory cache
+    provider: 'memory',
     ttl: 3600
+  },
+  compression: {
+    enabled: true,
+    type: 'gzip',
+    level: 6
   }
 });
 
 shield.initialize();
+
+// Use middleware
+app.use(shield.compression());
+app.use(shield.cache());
+
+// Start monitoring
+shield.metrics.enable();
 ```
 
-### Using Redis Cache
+### Advanced Configuration
 
 ```typescript
-import { HyperShield } from 'hypershield';
-
 const shield = new HyperShield({
   cache: {
     enabled: true,
@@ -40,42 +66,46 @@ const shield = new HyperShield({
     ttl: 3600,
     connection: {
       host: 'localhost',
-      port: 6379
+      port: 6379,
+      password: 'secret',
+      maxRetries: 3,
+      reconnectStrategy: {
+        maxAttempts: 5,
+        initialDelay: 1000,
+        maxDelay: 5000
+      }
     }
+  },
+  compression: {
+    enabled: true,
+    type: 'gzip',
+    level: 6,
+    threshold: 1024
+  },
+  alerts: {
+    enabled: true,
+    providers: ['email', 'webhook'],
+    throttleMs: 1000
+  },
+  metrics: {
+    enabled: true,
+    path: '/metrics',
+    collectDefaultMetrics: true
   }
 });
-
-shield.initialize();
 ```
 
-Choose the cache provider that best fits your needs:
-- `memory`: Simple setup, perfect for development and small applications
-- `redis`: Better for production and distributed systems
-
-## Documentation
-
-For detailed documentation, please check the [docs](./docs) directory.
-
-View our [architectural diagram](./assets/diagrams/HyperShield.png) to understand how HyperShield components work together.
-
-## Table of Contents
-
-1. [Getting Started](./docs/getting-started.md)
-2. [Technical Overview](./docs/technical-overview.md)
-3. [Compression Guide](./docs/compression.md)
-4. [Memory Cache Guide](./docs/memory-cache.md)
-5. [Metrics](./docs/metrics.md)
-
-## Quick Links
-
-- [Architecture Diagram](./assets/diagrams/HyperShield.png)
-- [Configuration Examples](./examples/)
+See [examples](./examples/) for more complex use cases.
 
 ## Installation
 
 ```bash
 npm install hypershield
 ```
+
+## Contributing
+
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for contribution guidelines.
 
 ## License
 
