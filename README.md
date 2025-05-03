@@ -56,7 +56,7 @@ app.use(shield.cache());
 shield.metrics.enable();
 ```
 
-See [examples](./examples/) for more complex use cases.
+See [examples](./docs/examples/) for more complex use cases.
 
 ## Installation
 
