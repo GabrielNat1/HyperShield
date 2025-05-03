@@ -3,6 +3,8 @@
 [![CI](https://github.com/GabrielNat1/HyperShield/actions/workflows/ci.yml/badge.svg)](https://github.com/GabrielNat1/HyperShield/actions/workflows/ci.yml)
 [![codecov](https://codecov.io/gh/GabrielNat1/HyperShield/branch/main/graph/badge.svg)](https://codecov.io/gh/GabrielNat1/HyperShield)
 [![npm version](https://badge.fury.io/js/hypershield.svg)](https://badge.fury.io/js/hypershield)
+![status](https://img.shields.io/badge/status-not--released-red)
+
 
 A high-performance middleware suite for building resilient APIs with built-in caching, compression, and monitoring capabilities.
 
