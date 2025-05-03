@@ -30,6 +30,10 @@ export class CompressionService {
 
     async compress(data: string | Buffer): Promise<Buffer> {
         try {
+            if (!data || (typeof data === 'string' && !data.length) || (Buffer.isBuffer(data) && !data.length)) {
+                throw new Error('Invalid input: empty data');
+            }
+
             if (!this.shouldCompress(data)) {
                 return Buffer.from(data);
             }

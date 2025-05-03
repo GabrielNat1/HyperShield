@@ -44,4 +44,35 @@ describe('CompressionService', () => {
 
     expect(highCompressed.length).toBeLessThanOrEqual(lowCompressed.length);
   });
+
+  it('should handle empty data correctly', async () => {
+    expect.assertions(1);
+    await expect(service.compress('')).rejects.toThrow('Compression failed');
+  });
+
+  it('should respect compression threshold', async () => {
+    const service = new CompressionService({ threshold: 100 });
+    const smallData = 'small';
+    const largeData = 'x'.repeat(200);
+
+    const smallCompressed = await service.compress(smallData);
+    const largeCompressed = await service.compress(largeData);
+
+    expect(Buffer.from(smallCompressed).toString()).toBe(smallData); // Not compressed
+    expect(largeCompressed.length).toBeLessThan(largeData.length); // Compressed
+  });
+
+  it('should compress with different compression levels', async () => {
+    const data = 'test'.repeat(1000);
+    
+    const lowService = new CompressionService({ level: 1 });
+    const highService = new CompressionService({ level: 9 });
+
+    const [lowCompressed, highCompressed] = await Promise.all([
+      lowService.compress(data),
+      highService.compress(data)
+    ]);
+
+    expect(highCompressed.length).toBeLessThanOrEqual(lowCompressed.length);
+  });
 });

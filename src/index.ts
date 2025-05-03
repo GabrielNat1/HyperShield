@@ -50,6 +50,13 @@ export class HyperShield {
             return null;
         }
     }
+
+    public getCacheManager(): CacheManager {
+        if (!this.cacheManager) {
+            throw new Error('Cache manager not initialized. Call initialize() first.');
+        }
+        return this.cacheManager;
+    }
 }
 
 export * from './core/types/config';
