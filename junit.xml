@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="45" failures="0" errors="0" time="18.012">
+  <testsuite name="CompressionService" errors="0" failures="0" skipped="0" timestamp="2025-05-03T20:39:39" time="7.686" tests="7">
+    <testcase classname="CompressionService should compress and decompress data correctly" name="CompressionService should compress and decompress data correctly" time="0.017">
+    </testcase>
+    <testcase classname="CompressionService should not compress small data below threshold" name="CompressionService should not compress small data below threshold" time="0.001">
+    </testcase>
+    <testcase classname="CompressionService should detect compressed data" name="CompressionService should detect compressed data" time="0.002">
+    </testcase>
+    <testcase classname="CompressionService should handle different compression levels" name="CompressionService should handle different compression levels" time="0.002">
+    </testcase>
+    <testcase classname="CompressionService should handle empty data correctly" name="CompressionService should handle empty data correctly" time="0.033">
+    </testcase>
+    <testcase classname="CompressionService should respect compression threshold" name="CompressionService should respect compression threshold" time="0.001">
+    </testcase>
+    <testcase classname="CompressionService should compress with different compression levels" name="CompressionService should compress with different compression levels" time="0.002">
+    </testcase>
+  </testsuite>
+  <testsuite name="RedisCache Integration" errors="0" failures="0" skipped="3" timestamp="2025-05-03T20:39:39" time="11.356" tests="3">
+    <testcase classname="RedisCache Integration should handle connection errors gracefully" name="RedisCache Integration should handle connection errors gracefully" time="0">
+      <skipped/>
+    </testcase>
+    <testcase classname="RedisCache Integration should handle large data with compression" name="RedisCache Integration should handle large data with compression" time="0">
+      <skipped/>
+    </testcase>
+    <testcase classname="RedisCache Integration should handle concurrent operations" name="RedisCache Integration should handle concurrent operations" time="0">
+      <skipped/>
+    </testcase>
+  </testsuite>
+  <testsuite name="Redis Cache Integration" errors="0" failures="0" skipped="2" timestamp="2025-05-03T20:39:39" time="12.004" tests="2">
+    <testcase classname="Redis Cache Integration should handle large datasets" name="Redis Cache Integration should handle large datasets" time="0">
+      <skipped/>
+    </testcase>
+    <testcase classname="Redis Cache Integration should handle TTL correctly" name="Redis Cache Integration should handle TTL correctly" time="0">
+      <skipped/>
+    </testcase>
+  </testsuite>
+  <testsuite name="Express Integration" errors="0" failures="0" skipped="0" timestamp="2025-05-03T20:39:47" time="5.344" tests="2">
+    <testcase classname="Express Integration should compress responses" name="Express Integration should compress responses" time="0.044">
+    </testcase>
+    <testcase classname="Express Integration should cache responses" name="Express Integration should cache responses" time="0.012">
+    </testcase>
+  </testsuite>
+  <testsuite name="MemoryCache" errors="0" failures="0" skipped="0" timestamp="2025-05-03T20:39:51" time="1.193" tests="4">
+    <testcase classname="MemoryCache should store and retrieve values" name="MemoryCache should store and retrieve values" time="0.011">
+    </testcase>
+    <testcase classname="MemoryCache should respect TTL" name="MemoryCache should respect TTL" time="1.11">
+    </testcase>
+    <testcase classname="MemoryCache should handle multiple operations" name="MemoryCache should handle multiple operations" time="0.001">
+    </testcase>
+    <testcase classname="MemoryCache should delete keys" name="MemoryCache should delete keys" time="0.001">
+    </testcase>
+  </testsuite>
+  <testsuite name="AlertService" errors="0" failures="0" skipped="0" timestamp="2025-05-03T20:39:51" time="2.425" tests="4">
+    <testcase classname="AlertService should send alerts to all configured destinations" name="AlertService should send alerts to all configured destinations" time="0.015">
+    </testcase>
+    <testcase classname="AlertService should throttle repeated alerts" name="AlertService should throttle repeated alerts" time="1.102">
+    </testcase>
+    <testcase classname="AlertService should retry failed alerts" name="AlertService should retry failed alerts" time="1.005">
+    </testcase>
+    <testcase classname="AlertService should include metadata in alerts" name="AlertService should include metadata in alerts" time="0.002">
+    </testcase>
+  </testsuite>
+  <testsuite name="CacheService Integration" errors="0" failures="0" skipped="0" timestamp="2025-05-03T20:39:52" time="0.854" tests="2">
+    <testcase classname="CacheService Integration should handle complex data types" name="CacheService Integration should handle complex data types" time="0.003">
+    </testcase>
+    <testcase classname="CacheService Integration should handle concurrent operations" name="CacheService Integration should handle concurrent operations" time="0.482">
+    </testcase>
+  </testsuite>
+  <testsuite name="CacheFactory" errors="0" failures="0" skipped="0" timestamp="2025-05-03T20:39:53" time="1.105" tests="4">
+    <testcase classname="CacheFactory should create memory cache service" name="CacheFactory should create memory cache service" time="0.003">
+    </testcase>
+    <testcase classname="CacheFactory should reuse existing instance" name="CacheFactory should reuse existing instance" time="0.003">
+    </testcase>
+    <testcase classname="CacheFactory should throw error when getting instance before initialization" name="CacheFactory should throw error when getting instance before initialization" time="0.027">
+    </testcase>
+    <testcase classname="CacheFactory should validate cache config" name="CacheFactory should validate cache config" time="0.01">
+    </testcase>
+  </testsuite>
+  <testsuite name="GzipCompressor" errors="0" failures="0" skipped="0" timestamp="2025-05-03T20:39:54" time="0.297" tests="3">
+    <testcase classname="GzipCompressor should compress and decompress data correctly" name="GzipCompressor should compress and decompress data correctly" time="0.054">
+    </testcase>
+    <testcase classname="GzipCompressor should throw error on empty data" name="GzipCompressor should throw error on empty data" time="0.011">
+    </testcase>
+    <testcase classname="GzipCompressor should compress with different levels" name="GzipCompressor should compress with different levels" time="0.007">
+    </testcase>
+  </testsuite>
+  <testsuite name="MetricsService" errors="0" failures="0" skipped="0" timestamp="2025-05-03T20:39:54" time="0.628" tests="4">
+    <testcase classname="MetricsService should increment counters correctly" name="MetricsService should increment counters correctly" time="0.003">
+    </testcase>
+    <testcase classname="MetricsService should record durations in histograms" name="MetricsService should record durations in histograms" time="0.002">
+    </testcase>
+    <testcase classname="MetricsService should handle cache metrics" name="MetricsService should handle cache metrics" time="0.001">
+    </testcase>
+    <testcase classname="MetricsService should clear metrics" name="MetricsService should clear metrics" time="0.025">
+    </testcase>
+  </testsuite>
+  <testsuite name="CompressionFactory" errors="0" failures="0" skipped="0" timestamp="2025-05-03T20:39:54" time="0.308" tests="5">
+    <testcase classname="CompressionFactory should create gzip compressor" name="CompressionFactory should create gzip compressor" time="0.008">
+    </testcase>
+    <testcase classname="CompressionFactory should reuse existing instances with same config" name="CompressionFactory should reuse existing instances with same config" time="0">
+    </testcase>
+    <testcase classname="CompressionFactory should create different instances for different configs" name="CompressionFactory should create different instances for different configs" time="0.001">
+    </testcase>
+    <testcase classname="CompressionFactory should throw for unsupported compression types" name="CompressionFactory should throw for unsupported compression types" time="0.019">
+    </testcase>
+    <testcase classname="CompressionFactory should validate compression options" name="CompressionFactory should validate compression options" time="0.004">
+    </testcase>
+  </testsuite>
+  <testsuite name="EventBus" errors="0" failures="0" skipped="0" timestamp="2025-05-03T20:39:54" time="0.478" tests="3">
+    <testcase classname="EventBus should notify subscribers when events are published" name="EventBus should notify subscribers when events are published" time="0.017">
+    </testcase>
+    <testcase classname="EventBus should allow multiple subscribers for same event" name="EventBus should allow multiple subscribers for same event" time="0.001">
+    </testcase>
+    <testcase classname="EventBus should not notify subscribers of different events" name="EventBus should not notify subscribers of different events" time="0.001">
+    </testcase>
+  </testsuite>
+  <testsuite name="Compression Performance Tests" errors="0" failures="0" skipped="0" timestamp="2025-05-03T20:39:54" time="2.602" tests="2">
+    <testcase classname="Compression Performance Tests should handle rapid successive compressions" name="Compression Performance Tests should handle rapid successive compressions" time="2.319">
+    </testcase>
+    <testcase classname="Compression Performance Tests should compare compression levels performance" name="Compression Performance Tests should compare compression levels performance" time="0.01">
+    </testcase>
+  </testsuite>
+</testsuites>
