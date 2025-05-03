@@ -1,7 +1,60 @@
+# Source files
 src/
 tests/
+docs/
 examples/
-*.ts
+
+# Config files
+.github/
+.vscode/
+.idea/
+.env*
+.eslintrc*
+.prettierrc*
+jest.config.js
+tsconfig.json
+tsconfig.*.json
+
+# Test files
+**/*.test.ts
+**/*.spec.ts
+coverage/
+.nyc_output/
+
+# Development files
+*.log
 *.map
-*.test.*
-.env
+.DS_Store
+Thumbs.db
+
+# Git files
+.git/
+.gitignore
+
+# CI/CD
+.circleci/
+.travis.yml
+azure-pipelines.yml
+
+# Docs and examples
+*.md
+!README.md
+!LICENSE.md
+assets/
+diagrams/
+
+# Development dependencies
+node_modules/
+
+# Cache and temp files
+.cache/
+.temp/
+*.tmp
+*.bak
+
+# Debug files
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
