@@ -32,13 +32,26 @@ export class CompressionFactory {
         let compressor: ICompressor;
         
         switch (type) {
+        /* --------------------------------------------------------------
+             * @note: Explanation of compression types
+             --------------------------------------------------------------
+             - 'gzip': Uses the DEFLATE algorithm (RFC 1952). It's widely supported across web servers,
+                       browsers, and libraries. Efficient and fast, especially suitable for compressing
+                       text-based formats like HTML, CSS, and JSON. Currently implemented via `GzipCompressor`.
+
+             - 'brotli': A modern compression algorithm developed by Google. It typically achieves better
+                         compression ratios than Gzip, especially for web content. Supported by modern
+                         browsers and ideal for production environments. However, it may be slower
+                         during compression compared to Gzip.
+
+             - 'deflate': Also based on the DEFLATE algorithm (RFC 1951), similar to Gzip but without
+                          additional headers. It results in slightly smaller output, but is less commonly
+                          used directly in APIs or browsers. Can be useful when minimal overhead is needed.
+                          Not implemented yet.
+        */
             case 'gzip':
                 compressor = new GzipCompressor(validatedOptions.level);
                 break;
-            // --------------------------------------------------------------
-            // * @note: futuros tipos que serão implementados
-            // --------------------------------------------------------------
-
             case 'brotli':
                 throw new Error(`Compressor type '${type}' not implemented yet`);
             case 'deflate':
