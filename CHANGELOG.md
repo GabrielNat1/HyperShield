@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/GabrielNat1/HyperShield/compare/v1.0.0...v1.1.0) (2025-05-05)
+
+
+### Features
+
+* implement build, setup, dependency check, and version bump scripts ([7b3429f](https://github.com/GabrielNat1/HyperShield/commit/7b3429f0b2d52b62c438340b0a5ef4c0d73d2e2f))
+
 # 1.0.0 (2025-05-05)
 
 
