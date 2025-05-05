@@ -79,12 +79,17 @@ export class RedisCache implements ICacheProvider {
             await this.client.connect();
         } catch (error) {
             console.error('Failed to connect to Redis:', error);
-            throw error;
+            throw new Error(`Redis connection failed: ${error instanceof Error ? error.message : 'Unknown error'}`);
         }
     }
 
     async get<T>(key: string): Promise<T | null> {
         try {
+            // Ensure client is connected before attempting operations
+            if (!this.client.isOpen) {
+                await this.connect();
+            }
+
             const value = await this.client.get(key);
             if (!value) return null;
 
@@ -94,7 +99,7 @@ export class RedisCache implements ICacheProvider {
             return await this.maybeDecompress<T>(data, compressed);
         } catch (error) {
             console.error(`Redis get error: ${error}`);
-            return null;
+            throw new Error(`Redis operation failed: ${error instanceof Error ? error.message : 'Unknown error'}`);
         }
     }
 
