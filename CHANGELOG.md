@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/GabrielNat1/HyperShield/compare/v1.3.0...v1.4.0) (2025-05-07)
+
+
+### Features
+
+* add logging configuration and validation to HyperShieldConfig ([e55e901](https://github.com/GabrielNat1/HyperShield/commit/e55e901f9310e894285bde070268595b61ad0076))
+
 # [1.3.0](https://github.com/GabrielNat1/HyperShield/compare/v1.2.0...v1.3.0) (2025-05-07)
 
 
