@@ -24,9 +24,14 @@ export interface HyperShieldConfig {
     alerts?: {
         enabled: boolean;
         providers: ('email' | 'webhook' | 'websocket')[];
+        throttle?: number;
+        retryAttempts?: number;
     };
     logging?: {
         level: 'debug' | 'info' | 'warn' | 'error';
         format?: 'json' | 'text';
+        destination?: 'console' | 'file';
+        maxFiles?: number;
+        maxSize?: string;
     };
 }
