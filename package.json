@@ -1,7 +1,13 @@
 {
   "name": "hypershield",
   "version": "1.3.0",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/**/*",
+    "!dist/**/*.test.*",
+    "!dist/**/__tests__/*"
+  ],
   "directories": {
     "doc": "docs",
     "example": "examples",
@@ -23,7 +29,8 @@
     "test:debug": "node --inspect-brk ./node_modules/jest/bin/jest.js --runInBand",
     "prepare": "husky install",
     "semantic-release": "semantic-release",
-    "lint-staged": "lint-staged"
+    "lint-staged": "lint-staged",
+    "verify": "npm run build && npm run test && npm pack --dry-run"
   },
   "keywords": [
     "cache",
