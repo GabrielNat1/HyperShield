@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/GabrielNat1/HyperShield/compare/v1.1.0...v1.2.0) (2025-05-07)
+
+
+### Features
+
+* add security and validation keywords to package.json and create .npmrc for package management ([5e93f0e](https://github.com/GabrielNat1/HyperShield/commit/5e93f0ef3749c55934f0b493a8b2cbcada603530))
+
 # [1.1.0](https://github.com/GabrielNat1/HyperShield/compare/v1.0.0...v1.1.0) (2025-05-05)
 
 
