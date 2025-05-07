@@ -1,3 +1,15 @@
+# [1.7.0](https://github.com/GabrielNat1/HyperShield/compare/v1.6.0...v1.7.0) (2025-05-07)
+
+
+### Bug Fixes
+
+* fixed error cache undefined ([9de4b0a](https://github.com/GabrielNat1/HyperShield/commit/9de4b0a139fd2ef569ad6d7ad8f086f38c8cc802))
+
+
+### Features
+
+* enhance configuration validation by adding metrics support and making properties optional ([6ed7a24](https://github.com/GabrielNat1/HyperShield/commit/6ed7a24a5b7dcb3258df59f6df399786fc674f41))
+
 # [1.6.0](https://github.com/GabrielNat1/HyperShield/compare/v1.5.4...v1.6.0) (2025-05-07)
 
 
