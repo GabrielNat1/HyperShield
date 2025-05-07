@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/GabrielNat1/HyperShield/compare/v1.4.0...v1.5.0) (2025-05-07)
+
+
+### Features
+
+* config before the publication npm ([941339d](https://github.com/GabrielNat1/HyperShield/commit/941339d50d341e6ea05871117598f24e79531860))
+
 # [1.4.0](https://github.com/GabrielNat1/HyperShield/compare/v1.3.0...v1.4.0) (2025-05-07)
 
 
