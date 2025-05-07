@@ -1,3 +1,10 @@
+## [1.5.1](https://github.com/GabrielNat1/HyperShield/compare/v1.5.0...v1.5.1) (2025-05-07)
+
+
+### Bug Fixes
+
+* **package:** add missing 'types' field for TypeScript consumers ([a61a75d](https://github.com/GabrielNat1/HyperShield/commit/a61a75d0e94839dfa9fb8b5502a29d3cd955fc41))
+
 # [1.5.0](https://github.com/GabrielNat1/HyperShield/compare/v1.4.0...v1.5.0) (2025-05-07)
 
 
