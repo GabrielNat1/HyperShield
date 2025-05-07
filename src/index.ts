@@ -1,6 +1,7 @@
 import { HyperShieldConfig } from './core/types/config';
 import { EventBus } from './core/events/eventBus';
 import { CacheManager } from './domains/cache/cacheManager';
+import { RequestHandler } from 'express';
 
 export type HyperShieldEvent = {
     type: 'cache:hit' | 'cache:miss' | 'cache:set' | 'cache:error';
@@ -13,6 +14,7 @@ export class HyperShield {
     private config: HyperShieldConfig;
     private eventBus: EventBus;
     private cacheManager: CacheManager;
+    private initialized: boolean = false;
 
     constructor(config: HyperShieldConfig) {
         this.config = config;
@@ -21,10 +23,14 @@ export class HyperShield {
     }
 
     public initialize(): void {
+        if (this.initialized) {
+            return;
+        }
         // Initialize components based on config
         if (this.config.cache?.enabled) {
             this.cacheManager.initialize();
         }
+        this.initialized = true;
     }
 
     public onEvent(event: string, handler: (data: HyperShieldEvent) => void): void {
@@ -56,6 +62,36 @@ export class HyperShield {
             throw new Error('Cache manager not initialized. Call initialize() first.');
         }
         return this.cacheManager;
+    }
+
+    public compression(_options?: { level?: number; threshold?: number }): RequestHandler {
+        if (!this.initialized) {
+            throw new Error('HyperShield must be initialized before using compression');
+        }
+        return (_req, _res, next) => {
+            // Compression middleware logic will be implemented here
+            next();
+        };
+    }
+
+    public cache(_options?: { ttl?: number }): RequestHandler {
+        if (!this.initialized) {
+            throw new Error('HyperShield must be initialized before using cache');
+        }
+        return (_req, _res, next) => {
+            // Cache middleware logic will be implemented here
+            next();
+        };
+    }
+
+    public metrics(_options?: { path?: string }): RequestHandler {
+        if (!this.initialized) {
+            throw new Error('HyperShield must be initialized before using metrics');
+        }
+        return (_req, _res, next) => {
+            // Metrics middleware logic will be implemented here
+            next();
+        };
     }
 }
 
