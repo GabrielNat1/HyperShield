@@ -17,12 +17,12 @@ export class HyperShield {
     constructor(config: HyperShieldConfig) {
         this.config = config;
         this.eventBus = new EventBus();
-        this.cacheManager = new CacheManager(config.cache);
+        this.cacheManager = new CacheManager(config.cache || { enabled: false, ttl: 3600 });
     }
 
     public initialize(): void {
         // Initialize components based on config
-        if (this.config.cache.enabled) {
+        if (this.config.cache?.enabled) {
             this.cacheManager.initialize();
         }
     }
