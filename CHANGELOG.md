@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/GabrielNat1/HyperShield/compare/v1.2.0...v1.3.0) (2025-05-07)
+
+
+### Features
+
+* added more tests and fixed redis.ts ([05e27c2](https://github.com/GabrielNat1/HyperShield/commit/05e27c2a87ba0070d3d19289ff0e84460bf9b227))
+
 # [1.2.0](https://github.com/GabrielNat1/HyperShield/compare/v1.1.0...v1.2.0) (2025-05-07)
 
 
