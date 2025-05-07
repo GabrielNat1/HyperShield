@@ -1,6 +1,6 @@
 {
   "name": "hypershield",
-  "version": "1.5.3",
+  "version": "1.5.4",
   "main": "dist/src/index.js",
   "bin": {
     "hypershield": "./dist/src/index.js"

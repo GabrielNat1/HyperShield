@@ -1,3 +1,10 @@
+## [1.5.4](https://github.com/GabrielNat1/HyperShield/compare/v1.5.3...v1.5.4) (2025-05-07)
+
+
+### Bug Fixes
+
+* fixed version ([a7158cf](https://github.com/GabrielNat1/HyperShield/commit/a7158cf26f8a2b47fcf8b7d4fdac19ce68f7241e))
+
 ## [1.5.3](https://github.com/GabrielNat1/HyperShield/compare/v1.5.2...v1.5.3) (2025-05-07)
 
 
