@@ -30,7 +30,12 @@
     "compression",
     "middleware",
     "api",
-    "typescript"
+    "typescript",
+    "security",
+    "typescript",
+    "validation",
+    "sanitization",
+    "xss-protection"
   ],
   "author": "GabrielNat1",
   "license": "MIT",
