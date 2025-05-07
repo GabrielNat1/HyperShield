@@ -6,6 +6,7 @@ import { CACHE } from '../../core/constants/constants';
 
 export class RedisCache implements ICacheProvider {
     private client!: RedisClientType;
+    private isConnecting: boolean = false;
     private compression: CompressionService;
     private options: RedisCacheOptions;
     private reconnectAttempts = 0;
@@ -74,22 +75,52 @@ export class RedisCache implements ICacheProvider {
         console.error('Redis client error:', error);
     }
 
-    private async connect(): Promise<void> {
+    public async connect(): Promise<void> {
+        if (this.isConnecting) {
+            return;
+        }
+
         try {
-            await this.client.connect();
-        } catch (error) {
-            console.error('Failed to connect to Redis:', error);
-            throw new Error(`Redis connection failed: ${error instanceof Error ? error.message : 'Unknown error'}`);
+            this.isConnecting = true;
+            if (!this.client?.isOpen) {
+                await this.client.connect();
+                // Wait for ready state instead of ping
+                await new Promise<void>((resolve, reject) => {
+                    const timeout = setTimeout(() => {
+                        reject(new Error('Redis connection timeout'));
+                    }, 5000);
+
+                    this.client.on('ready', () => {
+                        clearTimeout(timeout);
+                        resolve();
+                    });
+
+                    this.client.on('error', (error) => {
+                        clearTimeout(timeout);
+                        reject(error);
+                    });
+                });
+            }
+        } finally {
+            this.isConnecting = false;
+        }
+    }
+
+    public async disconnect(): Promise<void> {
+        if (this.client?.isOpen) {
+            await this.client.quit();
+        }
+    }
+
+    private async ensureConnection(): Promise<void> {
+        if (!this.client?.isOpen) {
+            await this.connect();
         }
     }
 
     async get<T>(key: string): Promise<T | null> {
+        await this.ensureConnection();
         try {
-            // Ensure client is connected before attempting operations
-            if (!this.client.isOpen) {
-                await this.connect();
-            }
-
             const value = await this.client.get(key);
             if (!value) return null;
 
@@ -104,6 +135,7 @@ export class RedisCache implements ICacheProvider {
     }
 
     async set<T>(key: string, value: T, ttl?: number): Promise<void> {
+        await this.ensureConnection();
         try {
             const [data, compressed] = await this.maybeCompress(value);
             const finalValue = compressed ? CACHE.COMPRESSION_PREFIX + data : data;
@@ -119,6 +151,7 @@ export class RedisCache implements ICacheProvider {
     }
 
     async delete(key: string): Promise<void> {
+        await this.ensureConnection();
         try {
             await this.client.del(key);
         } catch (error) {
@@ -127,10 +160,11 @@ export class RedisCache implements ICacheProvider {
     }
 
     async clear(): Promise<void> {
+        await this.ensureConnection();
         try {
-            await this.client.flushAll();
+            await this.client.flushDb();
         } catch (error) {
-            console.error(`Redis clear error: ${error}`);
+            console.error('Redis clear error:', error);
         }
     }
 
