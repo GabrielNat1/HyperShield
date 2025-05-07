@@ -1,3 +1,10 @@
+# [1.6.0](https://github.com/GabrielNat1/HyperShield/compare/v1.5.4...v1.6.0) (2025-05-07)
+
+
+### Features
+
+* add HyperShield class with configuration options for compression, cache, and metrics ([d682197](https://github.com/GabrielNat1/HyperShield/commit/d682197fa324809976a609a2c1c30bc3f08a9ead))
+
 ## [1.5.4](https://github.com/GabrielNat1/HyperShield/compare/v1.5.3...v1.5.4) (2025-05-07)
 
 
