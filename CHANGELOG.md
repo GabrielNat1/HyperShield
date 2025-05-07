@@ -1,3 +1,10 @@
+## [1.5.3](https://github.com/GabrielNat1/HyperShield/compare/v1.5.2...v1.5.3) (2025-05-07)
+
+
+### Bug Fixes
+
+* **package:** update main entry and start script paths to use dist/src ([b58e8d8](https://github.com/GabrielNat1/HyperShield/commit/b58e8d8c5dabfe7393160e10d24d6a25b53d6104))
+
 ## [1.5.2](https://github.com/GabrielNat1/HyperShield/compare/v1.5.1...v1.5.2) (2025-05-07)
 
 
