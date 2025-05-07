@@ -19,10 +19,14 @@ export class CacheManager {
     private createProvider(): ICacheProvider {
         switch (this.config.provider) {
             case 'redis':
-                if (!this.config.connection) {
-                    throw new Error('Redis connection config is required');
+                if (!this.config.connection?.host) {
+                    throw new Error('Redis host is required');
                 }
-                return new RedisCache(this.config.connection);
+                return new RedisCache({
+                    host: this.config.connection.host,
+                    port: this.config.connection.port ?? 6379,
+                    password: this.config.connection.password
+                });
 
             case 'memory':
                 return new MemoryCache();

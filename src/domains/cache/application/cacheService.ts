@@ -25,7 +25,12 @@ export class CacheService {
                 if (!this.config.connection) {
                     throw new Error('Redis connection configuration is required');
                 }
-                return new RedisCache(this.config.connection);
+                const redisOptions = {
+                    host: this.config.connection.host || 'localhost',
+                    port: this.config.connection.port || 6379,
+                    password: this.config.connection.password || ''
+                };
+                return new RedisCache(redisOptions);
             default:
                 throw new Error(`Unsupported cache provider: ${this.config.provider}`);
         }

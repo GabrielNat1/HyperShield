@@ -1,10 +1,10 @@
 export interface CacheConfig {
-    enabled: boolean;
-    provider: 'redis' | 'memcached' | 'memory';
-    ttl: number;
+    enabled?: boolean;
+    provider?: 'redis' | 'memcached' | 'memory';
+    ttl?: number;
     connection?: {
-        host: string;
-        port: number;
+        host?: string;
+        port?: number;
         password?: string;
     };
     maxRetries?: number;
@@ -12,26 +12,22 @@ export interface CacheConfig {
 }
 
 export interface CompressionConfig {
-    enabled: boolean;
-    type: 'gzip' | 'brotli' | 'deflate';
+    enabled?: boolean;
+    type?: 'gzip' | 'brotli' | 'deflate';
     level?: number;
-    threshold?: number; // tamanho mínimo para comprimir
+    threshold?: number;
+}
+
+export interface MetricsConfig {
+    enabled?: boolean;
+    path?: string;
+    prefix?: string;
+    defaultLabels?: Record<string, string>;
+    collectDefaultMetrics?: boolean;
 }
 
 export interface HyperShieldConfig {
-    cache: CacheConfig;
-    compression?: CompressionConfig;
-    alerts?: {
-        enabled: boolean;
-        providers: ('email' | 'webhook' | 'websocket')[];
-        throttle?: number;
-        retryAttempts?: number;
-    };
-    logging?: {
-        level: 'debug' | 'info' | 'warn' | 'error';
-        format?: 'json' | 'text';
-        destination?: 'console' | 'file';
-        maxFiles?: number;
-        maxSize?: string;
-    };
+    cache?: Partial<CacheConfig>;
+    compression?: Partial<CompressionConfig>;
+    metrics?: Partial<MetricsConfig>;
 }
