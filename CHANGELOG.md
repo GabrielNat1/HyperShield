@@ -1,3 +1,10 @@
+## [1.7.1](https://github.com/GabrielNat1/HyperShield/compare/v1.7.0...v1.7.1) (2025-05-07)
+
+
+### Bug Fixes
+
+* fixed errors in lib and configuration ([7dfc45a](https://github.com/GabrielNat1/HyperShield/commit/7dfc45a9244fc6fba244820c4b8a1159da75f43f))
+
 # [1.7.0](https://github.com/GabrielNat1/HyperShield/compare/v1.6.0...v1.7.0) (2025-05-07)
 
 
