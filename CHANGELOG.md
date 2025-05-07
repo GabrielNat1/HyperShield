@@ -1,3 +1,10 @@
+## [1.5.2](https://github.com/GabrielNat1/HyperShield/compare/v1.5.1...v1.5.2) (2025-05-07)
+
+
+### Bug Fixes
+
+* **package:** update version to 1.3.1 ([8322308](https://github.com/GabrielNat1/HyperShield/commit/8322308956482a349f4d44d7d9b691c821a5c220))
+
 ## [1.5.1](https://github.com/GabrielNat1/HyperShield/compare/v1.5.0...v1.5.1) (2025-05-07)
 
 
